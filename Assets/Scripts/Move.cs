@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Move : MonoBehaviour
@@ -7,31 +6,29 @@ public class Move : MonoBehaviour
 
     private Vector3 movement;
     [SerializeField] float speed = 10f;
-    [SerializeField] Rigidbody rigidbody;
+    private Rigidbody rigidbody;
    
 
     void Start()
     {
-        
+       rigidbody = GetComponent<Rigidbody>(); 
     }
 
     void Update()
     {
-        Movement();
+        MoveThePlayer();
 
     }
 
 
-    void Movement()
+    void MoveThePlayer()
     {
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
 
         movement = new Vector3(x, 0f, z);
         //transform.position += movement;
-        rigidbody.AddForce(movement);
-
-
+        base.GetComponent<Rigidbody>().AddForce(movement);
 
     }
 
