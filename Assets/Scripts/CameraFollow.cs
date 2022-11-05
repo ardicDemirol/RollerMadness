@@ -19,14 +19,19 @@ public class CameraFollow : MonoBehaviour
 
     void FixedUpdate()
     {
-        MoveTheCamera();
+        if(target != null) MoveTheCamera();
+
     }
 
     private void MoveTheCamera()
     {
-        Vector3 targetToMove = target.position + offsetVector;
-        transform.position = Vector3.Lerp(transform.position, targetToMove, cameraFollowSpeed * Time.deltaTime);
-        transform.LookAt(target.transform.position);
+        
+        
+            Vector3 targetToMove = target.position + offsetVector;
+            transform.position = Vector3.Lerp(transform.position, targetToMove, cameraFollowSpeed * Time.deltaTime);
+            transform.LookAt(target.transform.position);
+        
+        
     }
 
     private Vector3 CalculateOffset(Transform newTarget)

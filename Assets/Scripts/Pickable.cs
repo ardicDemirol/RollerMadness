@@ -18,10 +18,27 @@ public class Pickable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-        scoreManager.score += scoreAmount;
+        if(other.gameObject.tag == "Player")
+        {
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            scoreManager.score += scoreAmount;
 
-        Destroy(gameObject); /// Destroys this game object 
-                             /// Destroy(other.gameObject) => Destroys the object that collided with this object
+            Destroy(gameObject); /// Destroys this game object 
+                                 /// Destroy(other.gameObject) => Destroys the object that collided with this object
+
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            scoreManager.score += scoreAmount;
+
+            Destroy(gameObject);
+
+        }
+
     }
 }
