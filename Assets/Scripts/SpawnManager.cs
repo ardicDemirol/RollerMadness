@@ -8,17 +8,22 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] float spawnTime = 5f;
     [SerializeField] private Transform[] spawnPositions;
 
+    
+    private TimeManager timeManager;
+
+
     private float nextSpawnTime = 0f;
 
 
     void Start()
     {
-        spawnPositions[0].gameObject.name = "Test";
+        timeManager = FindObjectOfType<TimeManager>();
     }
 
     void Update()
     {
-        if(Time.time > nextSpawnTime)
+        
+        if(Time.timeSinceLevelLoad > nextSpawnTime && timeManager.gameOver == false && timeManager.gameFinished==false)
         {
             nextSpawnTime += spawnTime;
             //Instantiate(coinPrefab,transform.position,transform.rotation);
@@ -41,4 +46,6 @@ public class SpawnManager : MonoBehaviour
     {
         return Random.Range(0, objects.Length);
     }
+
+   
 }

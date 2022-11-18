@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     
     bool gameOver = false;
 
+    [SerializeField] private GameObject deadEffect;
+
     void Start()
     {
         target = GameObject.FindWithTag("Player").GetComponent<Transform>();   // FindWithTag() scans all object in scene and extracts tag we input.
@@ -39,5 +41,10 @@ public class Enemy : MonoBehaviour
             TimeManager timeManager = FindObjectOfType<TimeManager>();
             timeManager.gameOver = true;
         }
+    }
+
+    private void OnDisable()
+    {
+        Instantiate(deadEffect, transform.position, transform.rotation);
     }
 }

@@ -6,6 +6,9 @@ public class Pickable : MonoBehaviour
 {
 
     public int scoreAmount = 2;
+
+    [SerializeField] private GameObject deadEffect;
+
     void Start()
     {
         
@@ -40,5 +43,10 @@ public class Pickable : MonoBehaviour
 
         }
 
+    }
+
+    private void OnDisable()
+    {
+        Instantiate(deadEffect, transform.position, transform.rotation);
     }
 }

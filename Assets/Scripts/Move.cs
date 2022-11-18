@@ -7,16 +7,29 @@ public class Move : MonoBehaviour
     private Vector3 movement;
     [SerializeField] float speed = 10f;
     private Rigidbody rigidbody;
-   
+    private TimeManager timeManager;
+
+    [SerializeField] private GameObject deadEffect;
 
     void Start()
     {
        rigidbody = GetComponent<Rigidbody>(); 
+       timeManager = FindObjectOfType<TimeManager>();
     }
 
     void Update()
     {
-        MoveThePlayer();
+
+        if(timeManager.gameOver == false && timeManager.gameFinished == false)
+        {
+            MoveThePlayer();
+        }
+
+        if(timeManager.gameOver || timeManager.gameFinished)
+        {
+            rigidbody.isKinematic = true;
+        }
+        
 
     }
 
@@ -30,6 +43,11 @@ public class Move : MonoBehaviour
         //transform.position += movement;
         base.GetComponent<Rigidbody>().AddForce(movement);
 
+    }
+
+    private void OnDisable()
+    {
+        Instantiate(deadEffect, transform.position, transform.rotation);
     }
 
 
