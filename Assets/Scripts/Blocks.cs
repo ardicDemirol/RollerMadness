@@ -18,7 +18,7 @@ public class Blocks : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!isCollided)
+        if (!isCollided == false && collision.gameObject.tag == "Player")
         {
             print(collision.gameObject.name);
             meshRenderer.material.color = Color.black;
