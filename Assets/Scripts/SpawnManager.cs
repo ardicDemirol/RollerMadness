@@ -47,5 +47,6 @@ public class SpawnManager : MonoBehaviour
         return Random.Range(0, objects.Length);
     }
 
+    
    
 }

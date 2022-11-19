@@ -8,13 +8,18 @@ public class Move : MonoBehaviour
     [SerializeField] float speed = 10f;
     private Rigidbody rigidbody;
     private TimeManager timeManager;
+    private TeleportManager teleportManager;
+    private bool teleport = true;
 
     [SerializeField] private GameObject deadEffect;
+
+
 
     void Start()
     {
        rigidbody = GetComponent<Rigidbody>(); 
        timeManager = FindObjectOfType<TimeManager>();
+        teleportManager = FindObjectOfType<TeleportManager>();
     }
 
     void Update()
@@ -29,8 +34,8 @@ public class Move : MonoBehaviour
         {
             rigidbody.isKinematic = true;
         }
-        
 
+        Debug.Log(rigidbody.velocity);
     }
 
 
@@ -48,6 +53,28 @@ public class Move : MonoBehaviour
     private void OnDisable()
     {
         Instantiate(deadEffect, transform.position, transform.rotation);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Teleporter")
+        {
+            if (teleport)
+            {
+                teleport = false;
+                int boxNum = Int16.Parse(other.name);
+
+                transform.position = teleportManager.GetTeleportPosition(boxNum);
+                rigidbody.velocity = Vector3.zero;
+            }
+            else Invoke("AllowToTeleport", 3f);
+            
+        }
+    }
+
+    private void AllowToTeleport()
+    {
+        teleport = true;
     }
 
 
