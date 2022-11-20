@@ -11,6 +11,14 @@ public class Move : MonoBehaviour
     private TeleportManager teleportManager;
     private bool teleport = true;
 
+    
+    private bool isGround = true;
+   
+    [SerializeField] float jumpSpeed = 10f;
+
+
+
+
     [SerializeField] private GameObject deadEffect;
 
 
@@ -25,7 +33,7 @@ public class Move : MonoBehaviour
     void Update()
     {
 
-        if(timeManager.gameOver == false && timeManager.gameFinished == false)
+        if(timeManager.gameOver == false && timeManager.gameFinished == false )
         {
             MoveThePlayer();
         }
@@ -35,7 +43,7 @@ public class Move : MonoBehaviour
             rigidbody.isKinematic = true;
         }
 
-        Debug.Log(rigidbody.velocity);
+        // Debug.Log(rigidbody.velocity);   this line shows us the velocity vector of our player
     }
 
 
@@ -43,12 +51,24 @@ public class Move : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
         float z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        float y = Input.GetAxis("Jump") * Time.deltaTime * jumpSpeed;
 
-        movement = new Vector3(x, 0f, z);
-        //transform.position += movement;
-        base.GetComponent<Rigidbody>().AddForce(movement);
+        movement = new Vector3(x, y, z);
 
+        if (rigidbody.velocity.y == 0)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                rigidbody.AddForce(movement,ForceMode.Impulse);
+            }
+        }
+
+        
+        rigidbody.AddForce(movement);
     }
+
+
+
 
     private void OnDisable()
     {
@@ -76,6 +96,16 @@ public class Move : MonoBehaviour
     {
         teleport = true;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            isGround = true;
+        }
+    }
+
+
 
 
 

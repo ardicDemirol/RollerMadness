@@ -1,8 +1,5 @@
 using UnityEngine;
 
-
-
-
 public class TeleportManager : MonoBehaviour
 {
     public GameObject[] teleportBox;
