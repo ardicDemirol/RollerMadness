@@ -2303,21 +2303,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7527032288292904710, guid: b152f90f0b8faf7419b23a4651073825, type: 3}
-      propertyPath: m_Drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7527032288292904710, guid: b152f90f0b8faf7419b23a4651073825, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7527032288292904956, guid: b152f90f0b8faf7419b23a4651073825, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7527032288292904957, guid: b152f90f0b8faf7419b23a4651073825, type: 3}
-      propertyPath: jumpSpeed
-      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b152f90f0b8faf7419b23a4651073825, type: 3}
